@@ -1,0 +1,62 @@
+<button mat-icon-button>
+  <mat-icon (click)="callNew()">add_circle_outline</mat-icon>
+</button>
+
+<div class="row">
+  <div class="col s12 m12 l12">  
+    <mat-table #table [dataSource]="dataSource" matSort class="table-striped">
+      <ng-container matColumnDef="containerId">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Código </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.containerId}} </mat-cell>>
+      </ng-container>
+      <ng-container matColumnDef="descricao">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Descrição </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.descricao}} </mat-cell>>
+      </ng-container>
+      <ng-container matColumnDef="capacidade">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Capacidade </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.capacidade}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="comprimento">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Comprimento </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.comprimento}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="largura">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Largura </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.largura}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="tipo">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Tipo </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.tipo}} </mat-cell>
+    </ng-container>
+      <ng-container matColumnDef="dtCadastro">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Cadastro </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{datePipe.transform(element.dtCadastro, 'dd/MM/yyyy HH:mm')}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="dtAtualizacao">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Atualizado </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{datePipe.transform(element.dtAtualizacao, 'dd/MM/yyyy HH:mm')}} </mat-cell>
+    </ng-container>
+      <ng-container matColumnDef="dtVencimento">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Vencimento </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{datePipe.transform(element.dtVencimento, 'dd/MM/yyyy')}} </mat-cell>
+
+      </ng-container>
+      
+      <ng-container matColumnDef="editColumn">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Ações </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button mat-button (click)="deleteConfirmation(element.containerId)">
+              <mat-icon>delete</mat-icon>
+          </button>
+          <button mat-button (click)="callUpdate(element.containerId)">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </mat-cell> 
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>  
+    <mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>  
+  </div>
+</div>
